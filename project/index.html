@@ -12,9 +12,15 @@
 	</header>
 	<main>
 		<!--new task configuration-->
-		<div class="flexbox">
+		<div class="flexbox configuration">
+			<input id="taskNameTXT"placeholder="Task Name" autocomplete="off" type="text">
+			<select id="taskDiffTXT">
+				<option value="" selected disabled>Task difficulty</option>
+				<option value="Easy" data-points="100">Easy</option>
+				<option value="Medium" data-points="200">Medium</option>
+				<option value="Hard" data-points="300">Hard</option>
+			</select>
 			<button id="taskAdder">ADD NEW TASK</button>
-			<input>
 		</div>
 		<!--new task container-->
 		<div id="taskContainer">
