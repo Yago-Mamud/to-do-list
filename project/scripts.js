@@ -1,15 +1,16 @@
+//ADDER HANDLER
 //elements
 const taskAdderButton = document.getElementById("taskAdder");
 const taskContainer = document.getElementById("taskContainer");
 const taskDiffTXT = document.getElementById("taskDiffTXT");
-//adder handler
+const taskNameTXT = document.getElementById("taskNameTXT");
 taskAdderButton.addEventListener("click", () => {
 	//gets current
-	const taskNameTXT = document.getElementById("taskNameTXT").value;
+	const taskNameValue  = taskNameTXT.value;
 	const taskDiffValue = taskDiffTXT.value;
 	const taskPointsValue = taskDiffTXT.options[taskDiffTXT.selectedIndex].getAttribute("data-points");
 	//validation
-	if (taskNameTXT == "" || taskDiffValue == "") {
+	if (taskNameValue == "" || taskDiffValue == "") {
 		alert("Please, fill out every field");
 		return false;
 	}
@@ -21,7 +22,7 @@ taskAdderButton.addEventListener("click", () => {
 		taskInfoContainer.classList.add("information");
 			//task name
 			const taskName = document.createElement("h1");
-			taskName.innerHTML = taskNameTXT;
+			taskName.innerHTML = taskNameValue;
 			//task description container
 			const taskDesc = document.createElement("div");
 			taskDesc.classList.add("flexbox","description");
@@ -33,6 +34,7 @@ taskAdderButton.addEventListener("click", () => {
 				taskPoints.innerHTML = taskPointsValue;
 		//end task button
 		const taskEndButton = document.createElement("button");
+		taskEndButton.classList.add("taskEnder");
 		taskEndButton.innerHTML = "END TASK"
 	//creates parent child relationship
 		taskInfoContainer.append(taskName, taskDesc);
@@ -40,4 +42,11 @@ taskAdderButton.addEventListener("click", () => {
 		newTask.append(taskInfoContainer, taskEndButton);
 	//inserts into html
 	taskContainer.appendChild(newTask);
-})
+	//cleans input fields
+	taskNameTXT.value = "";
+	taskDiffTXT.selectedIndex = 0;
+	//handles task ending
+	taskEndButton.addEventListener("click", () => {
+		newTask.remove();
+	});
+});

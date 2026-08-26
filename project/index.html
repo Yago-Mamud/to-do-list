@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clock</title>
+    <title>Task Logs</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 	<header class="flexbox center">
-		<h1>Hello, world!</h1>
+		<h1>Task Logs</h1>
 	</header>
 	<main>
 		<!--new task configuration-->
 		<div class="flexbox configuration">
+			<h1>New Task</h1>
 			<input id="taskNameTXT"placeholder="Task Name" autocomplete="off" type="text">
 			<select id="taskDiffTXT">
-				<option value="" selected disabled>Task difficulty</option>
+				<option value="" selected disabled>Task Difficulty</option>
 				<option value="Easy" data-points="100">Easy</option>
 				<option value="Medium" data-points="200">Medium</option>
 				<option value="Hard" data-points="300">Hard</option>
@@ -36,7 +37,7 @@
 					</div>
 				</div>
 				<!--finishes the task-->
-				<button>END TASK</button>
+				<button class="taskEnder">END TASK</button>
 			</div>
 		</div>
 	</main>

@@ -15,10 +15,12 @@
 	}
 	:root {
 		/* BACKGROUDNS */
-		--backgroundMain: #F3F3F3;
+		--backgroundMain: #FBFBFB;
+		--backgroundDuo: #90e0bc;
 		/* SOLID COLORS */
-		--green: #27AE60;
-		--green2: #239654;
+		--main: #D3D3D3;
+		--main2: #8eedc2;
+		--main3: #38a675;
 		/* TEXT */
 		--text1: #000000;
 		--text2: #E0E0E0;
@@ -34,26 +36,28 @@
 	body {
 		height: 100vh;
 		overflow: auto;
+		
 	}
 	header {
-		border: 2px solid blue;
-		background-color: #FFFFFF;
+		border-bottom: 1px solid var(--main);
+		background-color: var(--backgroundMain);
 		position: sticky;
 		top: 0;
 		z-index: 100;
 		width: 100%;
-		height: 4rem;
+		height: 6rem;
 		padding: 0 1rem;
 		box-shadow: 0px 0px 8px #000000;
 	}
 	main {
-		border: 2px solid green;
 		width: 100%;
 		min-height: 100%;
 		padding: 1rem 4rem;
 		display: flex;
 		align-items: center;
 		flex-direction: column;
+		background-color: var(--backgroundMain);
+		background-image: linear-gradient(to bottom right, #F3F3F3, #E0E0E0, #F3F3F3);
 	}
 /* BOX CLASSES */
 	.flexbox {
@@ -65,26 +69,34 @@
 /* TASKS */
 	#taskContainer {
 		width: 100%;
-		border: 2px solid blue;
 		display: flex;
 		align-items: center;
 		flex-direction: column;
 		gap: 0.5rem;
 	}
 	.configuration {
-		border: 2px solid blue;
+		border: 2px solid var(--main);
+		border-radius: 8px;
+		background-color: var(--backgroundMain);
 		flex-direction: column;
 		justify-content: center;
 		width: 50%;
 		gap: 0.5rem;
+		padding: 1rem;
+		margin-bottom: 1.5rem;
+	}
+	.configuration button {
+		height: 2rem;
 	}
 	.task {
-		border: 2px solid red;
+		border: 2px solid var(--main);
+		border-radius: 8px;
+		background-color: var(--backgroundMain);
 		display: grid;
 		grid-template-columns: 1fr auto;
 		width: 60%;
 		justify-content: space-between;
-		padding: 0.2rem;
+		padding: 0.5rem;
 		transition: 0.1s;
 	}
 	.task:hover {
@@ -96,13 +108,26 @@
 		padding: 0.5rem;
 	}
 	.information {
-		border: 2px solid blue;
 		width: 100%;
 		line-break: anywhere;
 	}
 	.description {
-		border: 2px solid yellow;
 		flex-direction: row;
 		gap: 4rem;
 		width: 100%;
+	}
+	input, select {
+		height: 3rem;
+		font-size: 1.5rem;
+		padding: 0.5rem;
+		border: 1px solid var(--main);
+		border-radius: 8px;
+	}
+	select:hover {
+		cursor: pointer;
+	}
+	button {
+		border: 1px solid var(--main);
+		border-radius: 8px;
+		cursor: pointer;
 	}
