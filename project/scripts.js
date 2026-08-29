@@ -4,17 +4,11 @@ const taskAdderButton = document.getElementById("taskAdder");
 const taskContainer = document.getElementById("taskContainer");
 const taskDiffTXT = document.getElementById("taskDiffTXT");
 const taskNameTXT = document.getElementById("taskNameTXT");
-taskAdderButton.addEventListener("click", () => {
-	//gets current
-	const taskNameValue  = taskNameTXT.value;
-	const taskDiffValue = taskDiffTXT.value;
-	const taskPointsValue = taskDiffTXT.options[taskDiffTXT.selectedIndex].getAttribute("data-points");
-	//validation
-	if (taskNameValue == "" || taskDiffValue == "") {
-		alert("Please, fill out every field");
-		return false;
-	}
-	//new task main div
+//json object
+let tasks = JSON.parse(localStorage.getItem("loadTask")) || [];
+tasks.forEach(task => taskRender(task));
+//renders
+function taskRender(taskObj) {
 	const newTask = document.createElement("div");
 	newTask.classList.add("task");
 		//task information container
@@ -22,16 +16,16 @@ taskAdderButton.addEventListener("click", () => {
 		taskInfoContainer.classList.add("information");
 			//task name
 			const taskName = document.createElement("h1");
-			taskName.innerHTML = taskNameValue;
+			taskName.innerHTML = taskObj.name;
 			//task description container
 			const taskDesc = document.createElement("div");
 			taskDesc.classList.add("flexbox","description");
 				//task difficulty
 				const taskDiff = document.createElement("h2");
-				taskDiff.innerHTML = taskDiffValue;
+				taskDiff.innerHTML = taskObj.diff;
 				//task point amount
 				const taskPoints = document.createElement("h2");
-				taskPoints.innerHTML = taskPointsValue;
+				taskPoints.innerHTML = taskObj.points;
 		//end task button
 		const taskEndButton = document.createElement("button");
 		taskEndButton.classList.add("taskEnder");
@@ -45,8 +39,41 @@ taskAdderButton.addEventListener("click", () => {
 	//cleans input fields
 	taskNameTXT.value = "";
 	taskDiffTXT.selectedIndex = 0;
+	
 	//handles task ending
 	taskEndButton.addEventListener("click", () => {
 		newTask.remove();
+		tasks = tasks.filter((task) => { 
+			if (task.id !== taskObj.id) {
+				return true;
+			} else {
+				return false;
+			}
+		});
+		localStorage.setItem("loadTask", JSON.stringify(tasks));
 	});
+}
+//adds
+taskAdderButton.addEventListener("click", () => {
+	//gets current
+	const taskNameValue  = taskNameTXT.value;
+	const taskDiffValue = taskDiffTXT.value;
+	const taskPointsValue = taskDiffTXT.options[taskDiffTXT.selectedIndex].getAttribute("data-points");
+	//validation
+	if (taskNameValue == "" || taskDiffValue == "") {
+		alert("Please, fill out every field");
+		return false;
+	}
+	//creates the object
+	const taskObject = {
+		id: Date.now(),
+		name: taskNameValue,
+		diff: taskDiffValue,
+		points: taskPointsValue
+	};
+	tasks.push(taskObject);
+	//uploads object to JSON
+	localStorage.setItem("loadTask", JSON.stringify(tasks));
+	//renders
+	taskRender(taskObject);
 });
