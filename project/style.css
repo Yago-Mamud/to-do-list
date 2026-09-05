@@ -39,6 +39,8 @@
 		
 	}
 	header {
+		display: flex;
+		justify-content: space-between;
 		border-bottom: 1px solid var(--main);
 		background-color: var(--backgroundMain);
 		position: sticky;
@@ -59,6 +61,29 @@
 		background-color: var(--backgroundMain);
 		background-image: linear-gradient(to bottom right, #F3F3F3, #E0E0E0, #F3F3F3);
 	}
+	progress {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		height: 1.5rem;
+		width: 100%;
+		border-radius: 12px;
+		transition: 0.1s;
+	}
+	progress:hover {
+		transform: scale(1.1);
+	}
+		/* Chrome, Safari, Edge, Opera */
+		progress::-webkit-progress-value {
+		  background-color: #00FF00; 
+		  transition: width 0.5s ease;
+		}
+
+		/* Firefox */
+		progress::-moz-progress-bar {
+		  background-color: #00FF00; 
+		  transition: width 0.5s ease;
+		}
 /* BOX CLASSES */
 	.flexbox {
 		display: flex;

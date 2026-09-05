@@ -4,8 +4,10 @@ const taskAdderButton = document.getElementById("taskAdder");
 const taskContainer = document.getElementById("taskContainer");
 const taskDiffTXT = document.getElementById("taskDiffTXT");
 const taskNameTXT = document.getElementById("taskNameTXT");
-//json object
-let tasks = JSON.parse(localStorage.getItem("loadTask")) || [];
+//parses the saved task into an array
+const savedTasks = JSON.parse(localStorage.getItem("loadTask"));
+//makes sure its parsed to an array before loading, otherwise it makes an empty one
+let tasks = Array.isArray(savedTasks) ? savedTasks : [];
 tasks.forEach(task => taskRender(task));
 //renders
 function taskRender(taskObj) {
@@ -51,9 +53,10 @@ function taskRender(taskObj) {
 			}
 		});
 		localStorage.setItem("loadTask", JSON.stringify(tasks));
+		levelHandler(taskObj.points);
 	});
 }
-//adds
+//adds new tasks
 taskAdderButton.addEventListener("click", () => {
 	//gets current
 	const taskNameValue  = taskNameTXT.value;
@@ -77,3 +80,18 @@ taskAdderButton.addEventListener("click", () => {
 	//renders
 	taskRender(taskObject);
 });
+
+//handles levels
+function levelHandler(levelPoints) {
+	const progressBar = document.getElementById("levelBar")
+	let progressValue = Number(levelPoints);
+	let maxValue = Number(progressBar.max);
+	let currentXP = Number(progressBar.value);
+	let cXPPV = progressValue + currentXP;
+	if (cXPPV >= maxValue) {
+		progressBar.value = cXPPV - maxValue;
+		progressBar.max = maxValue + 10;
+	} else {
+		progressBar.value = cXPPV;
+	}
+}
