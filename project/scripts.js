@@ -82,6 +82,8 @@ taskAdderButton.addEventListener("click", () => {
 });
 
 //handles levels
+const playerLevelTXT = document.getElementById("playerLevel");
+let playerLevel = Number(playerLevelTXT.innerHTML);
 function levelHandler(levelPoints) {
 	const progressBar = document.getElementById("levelBar")
 	let progressValue = Number(levelPoints);
@@ -91,6 +93,9 @@ function levelHandler(levelPoints) {
 	if (cXPPV >= maxValue) {
 		progressBar.value = cXPPV - maxValue;
 		progressBar.max = maxValue + 10;
+		playerLevel += 1;
+		playerLevelTXT.innerHTML = String(playerLevel);
+		
 	} else {
 		progressBar.value = cXPPV;
 	}

@@ -1,0 +1,3 @@
+→ Add a level updating system
+→ Rework the xp amount needed for each level
+→ Make so it saves levels in the local storage
