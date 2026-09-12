@@ -84,8 +84,15 @@ taskAdderButton.addEventListener("click", () => {
 //handles levels
 const playerLevelTXT = document.getElementById("playerLevel");
 let playerLevel = Number(playerLevelTXT.innerHTML);
+const savedLevel = JSON.parse(localStorage.getItem("playerLevelJSON"));
+const progressBar = document.getElementById("levelBar")
+let savedCurrentBarExperience = JSON.parse(localStorage.getItem("playerXPJSON"));
+progressBar.value = savedCurrentBarExperience === null ? 0 : Number(savedCurrentBarExperience);
+let savedMaxBarExperience = JSON.parse(localStorage.getItem("progressMaxValue"));
+progressBar.max = savedMaxBarExperience === null ? 100 : Number(savedMaxBarExperience);
+playerLevel = savedLevel === null ? 1 : Number(savedLevel);
+playerLevelTXT.innerHTML = savedLevel === null ? "1" : String(savedLevel);
 function levelHandler(levelPoints) {
-	const progressBar = document.getElementById("levelBar")
 	let progressValue = Number(levelPoints);
 	let maxValue = Number(progressBar.max);
 	let currentXP = Number(progressBar.value);
@@ -94,9 +101,11 @@ function levelHandler(levelPoints) {
 		progressBar.value = cXPPV - maxValue;
 		progressBar.max = maxValue + 10;
 		playerLevel += 1;
-		playerLevelTXT.innerHTML = String(playerLevel);
-		
+		playerLevelTXT.innerHTML = playerLevel;
+		localStorage.setItem("playerLevelJSON", JSON.stringify(playerLevel));
 	} else {
 		progressBar.value = cXPPV;
 	}
+	localStorage.setItem("playerXPJSON", JSON.stringify(progressBar.value));
+	localStorage.setItem("progressMaxValue", JSON.stringify(progressBar.max));
 }

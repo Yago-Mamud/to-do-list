@@ -1,0 +1,2 @@
+→ currently, if the player completes a quest that levels up multiple levels at once, he will only
+level up one level.
